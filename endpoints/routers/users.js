@@ -61,7 +61,7 @@ router.post(`/users/login`, m.validate.user, async (req, res) => {
 router.get(
   `/users/:id`,
   m.validate.token,
-  m.validate.admin,
+  // m.validate.admin,
   async (req, res) => {
     const {id} = req.params;
     try {
@@ -77,7 +77,7 @@ router.get(
 );
 
 //get all users
-router.get(`/users`, m.validate.token, m.validate.admin, async (req, res) => {
+router.get(`/users`, m.validate.token, async (req, res) => {
   console.log(req.user);
 
   try {
