@@ -8,7 +8,12 @@ const m = {
 
 //add a user
 router.post(`/users/register`, async (req, res) => {
-  if (!req.body || !req.body.username.length || !req.body.password.length) {
+  if (
+    !req.body ||
+    !req.body.username.length ||
+    !req.body.password.length ||
+    !req.body.email.length
+  ) {
     return res
       .status(400)
       .json({message: "Please provide a username and password."});
@@ -20,7 +25,7 @@ router.post(`/users/register`, async (req, res) => {
   };
   try {
     const user = await model.add_one(new_user);
-    console.log(new_user);
+    console.log("new user", new_user);
     const token = m.validate.generate_token(user);
     res.status(200).json({
       message: `Welcome, new user.`,
