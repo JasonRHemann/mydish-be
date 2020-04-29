@@ -26,7 +26,7 @@ get_by_id = (id) =>
       "users.username",
       "users.password",
       "users.email",
-      db.raw(`json_agg(roles.name) as roles`),
+      //db.raw(`json_agg(roles.name) as roles`),
     )
     .groupBy("users.id", "users.username", "users.password", "users.email")
     .first();
