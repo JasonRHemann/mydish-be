@@ -19,7 +19,7 @@ add_one = async (obj) => {
 get_by_id = (id) =>
   db("users")
     .where("users.id", id)
-    .join("user_roles as ur", "users.id", "=", "ur.user_id", "user.email")
+    .join("user_roles as ur", "users.id", "=", "ur.user_id", "users.email")
     .join("roles", "ur.role_id", "=", "roles.id")
     .select(
       "users.id",

@@ -16,13 +16,19 @@ router.post(`/users/register`, async (req, res) => {
   const new_user = {
     username: req.body.username,
     password: m.encrypt.password(req.body.password),
+    email: req.body.email,
   };
   try {
     const user = await model.add_one(new_user);
+    console.log(new_user);
     const token = m.validate.generate_token(user);
     res.status(200).json({
       message: `Welcome, new user.`,
-      user: {id: user.id, username: user.username},
+      user: {
+        id: user.id,
+        username: user.username,
+        email: user.email,
+      },
       token,
     });
   } catch (err) {
@@ -45,7 +51,7 @@ router.post(`/users/login`, m.validate.user, async (req, res) => {
       const token = req.token;
       res.status(200).json({
         message: `Great job remembering your password.`,
-        user: {id: user.id, username: user.username},
+        user: {id: user.id, username: user.username, email: user.email},
         token,
       });
     } else
