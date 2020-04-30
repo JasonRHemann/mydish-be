@@ -21,7 +21,7 @@ router.post(`/users/register`, async (req, res) => {
   const new_user = {
     username: req.body.username,
     password: m.encrypt.password(req.body.password),
-    email: req.body.email,
+    email: req.body.email || "none",
   };
   try {
     const user = await model.add_one(new_user);
